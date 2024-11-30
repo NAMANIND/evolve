@@ -1,50 +1,124 @@
-# Welcome to your Expo app 👋
+# Fitness Tracker App 🏃‍♂️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile application for tracking workouts and recording exercise videos. Built with Expo (React Native) and Node.js.
 
-## Get started
+## Tech Stack 🛠
 
-1. Install dependencies
+### Mobile App
+- Expo (React Native)
+- React Context API
+- Expo Camera
+- Zod for validation
+- AsyncStorage
 
-   ```bash
-   npm install
-   ```
+### Backend
+- Node.js & Express
+- MongoDB
+- AWS S3 for video storage
+- Docker & Docker Compose
 
-2. Start the app
+### DevOps
+- GitHub Actions
+- Docker Hub
+- AWS EC2 (Self-hosted runner)
 
-   ```bash
-    npx expo start
-   ```
+## Project Structure 📁
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+├── mobile/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── screens/
+│   │   ├── context/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── App.js
+│   └── package.json
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── Dockerfile
+│   └── package.json
+│
+└── docker-compose.yml
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Setup & Installation 🚀
 
-## Learn more
+### Prerequisites
+- Node.js 18+
+- Expo CLI
+- Docker & Docker Compose
+- AWS Account
+- MongoDB Atlas
 
-To learn more about developing your project with Expo, look at the following resources:
+### Backend Setup
+1. Clone repository
+```bash
+git clone https://github.com/yourusername/fitness-tracker.git
+cd fitness-tracker/backend
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+2. Create .env file
+```env
+NODE_ENV=development
+MONGODB_URI=your_mongodb_uri
+AWS_ACCESS_KEY_ID=your_key
+AWS_SECRET_ACCESS_KEY=your_secret
+AWS_REGION=your_region
+AWS_BUCKET_NAME=your_bucket
+```
 
-## Join the community
+3. Local development
+```bash
+npm install
+npm run dev
+```
 
-Join our community of developers creating universal apps.
+4. Docker development
+```bash
+docker-compose up
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Mobile App Setup
+1. Navigate to mobile directory
+```bash
+cd ../mobile
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start Expo
+```bash
+npx expo start
+```
+
+## Deployment 🌐
+
+### CI/CD Pipeline
+The project uses GitHub Actions for automated deployment:
+- Builds Docker image on push to main
+- Pushes to Docker Hub
+- Deploys to EC2 using self-hosted runner
+
+### Environment Variables
+Required secrets in GitHub repository:
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`
+- `MONGODB_URI`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
+- `AWS_BUCKET_NAME`
+
+### Fitness Tracker App Architecture Diagram
+![image](https://github.com/user-attachments/assets/f4f589f7-9dde-40fa-830b-d8bc1683fe77)
+
