@@ -36,7 +36,7 @@ const ProfilePage = () => {
     if (userContext.user) {
       userContext.setTabBarShown(true);
     }
-  }, [userContext]);
+  }, []);
 
   useEffect(() => {
     if (userData) {

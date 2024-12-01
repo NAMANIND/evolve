@@ -602,6 +602,19 @@ const FitnessTracker = () => {
       })}
     </ScrollView>
   );
+
+  const stepback = () => {
+    if (currentStep === 4) {
+      setCurrentStep(3);
+      setIntensity(null);
+    } else if (currentStep === 3) {
+      setCurrentStep(2);
+      setDuration(0);
+    } else if (currentStep === 2) {
+      setCurrentStep(1);
+      setSelectedExercise(null);
+    }
+  };
   // Main render method
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#f9fafb" }}>
@@ -802,7 +815,7 @@ const FitnessTracker = () => {
             style={{
               padding: 4,
             }}
-            onPress={() => setCurrentStep(currentStep - 1)}
+            onPress={stepback}
           >
             <MaterialCommunityIcons
               name="undo-variant"

@@ -339,12 +339,6 @@ const Dashboard: React.FC<DashboardProps> = ({ userContext }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (userContext.user) {
-      userContext.setTabBarShown(true);
-    }
-  }, []);
-
   const userLogs = userContext.userLogs;
 
   const exerciseTypes = useMemo(

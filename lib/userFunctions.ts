@@ -2,6 +2,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
 import * as FileSystem from "expo-file-system";
+import Constants from "expo-constants";
 
 // Types
 export interface User {
@@ -43,7 +44,8 @@ const STORAGE_KEYS = {
   USER_LOGS: "fitness_app_user_logs",
 } as const;
 
-const API_URL = process.env.REACT_APP_API_URL || "http://13.235.78.233:3000";
+const API_URL =
+  Constants.expoConfig?.extra?.APIURL || "http://13.235.78.233:3000";
 
 // User Functions
 export const getCurrentUser = async (): Promise<User | null> => {
@@ -51,7 +53,6 @@ export const getCurrentUser = async (): Promise<User | null> => {
     const userData = await AsyncStorage.getItem(STORAGE_KEYS.USER);
     console.log("userData", userData);
     if (!userData) return null;
-
     // if (userData) {
     //   clearUserData();
     // }
@@ -112,7 +113,6 @@ export const updateUser = async (
 export const getUserLogs = async (userId: string): Promise<ExerciseLog[]> => {
   try {
     const isConnected = (await NetInfo.fetch()).isConnected;
-
     if (isConnected) {
       const response = await fetch(`${API_URL}/api/exercises/user/${userId}`);
       if (!response.ok) throw new Error("Failed to fetch user logs");
@@ -154,8 +154,6 @@ export const addExerciseLog = async (
     if (!isConnected) {
       throw new Error("Internet connection required to add exercise log");
     }
-    const API_URL =
-      process.env.REACT_APP_API_URL || "http://13.235.78.233:3000";
 
     console.log("API_URL", API_URL);
     console.log("userId", userId);
@@ -213,9 +211,6 @@ export const uploadExerciseVideo = async (
     }
 
     console.log("Uploading video from path:", fileUri);
-
-    const API_URL =
-      process.env.REACT_APP_API_URL || "http://13.235.78.233:3000";
 
     // Read the file as base64
     const fileInfo = await FileSystem.getInfoAsync(fileUri);

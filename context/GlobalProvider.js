@@ -20,7 +20,7 @@ const GlobalProvider = ({ children }) => {
     getCurrentUser()
       .then((res) => {
         if (res) {
-          clearUserData();
+          // clearUserData();
           setIsLogged(true);
           setUser(res);
           if (res) {
