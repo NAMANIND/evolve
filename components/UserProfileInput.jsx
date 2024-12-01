@@ -20,19 +20,24 @@ const UserProfileInput = ({ userContext }) => {
       targetWeight: parseFloat(targetWeight),
     };
 
-    const userObject = await updateUser(userData);
-    console.log("resoinse", userObject);
-
-    if (userObject._id) {
-      console.log("here");
-      const getData = await getCurrentUser();
-      console.log("User Datani:", getData);
-      userContext.setUser(getData);
-    } else {
-      // Log or perform an action with the userData
-      console.log("User Data Submitted:", userObject);
-      Alert.alert("User Data Submitted", JSON.stringify(userObject, null, 2));
-    }
+    updateUser(userData)
+      .then((userObject) => {
+        if (userObject._id) {
+          getCurrentUser().then((getdata) => {
+            userContext.setUser(getdata);
+          });
+        } else {
+          // Log or perform an action with the userData
+          console.log("User Data Submitted:", userObject);
+          Alert.alert(
+            "User Data Submitted",
+            JSON.stringify(userObject, null, 2)
+          );
+        }
+      })
+      .catch((error) => {
+        Alert.alert("Error", error.message);
+      });
   };
 
   return (
