@@ -47,6 +47,20 @@ const STORAGE_KEYS = {
 const API_URL =
   Constants.expoConfig?.extra?.APIURL || "http://13.235.78.233:3000";
 
+export const getConstants = async () => {
+  try {
+    const response = await fetch(`${API_URL}/api/constants`);
+    if (!response.ok) throw new Error("Failed to fetch constants");
+
+    const constants = await response.json();
+
+    return constants;
+  } catch (error) {
+    console.error("Error fetching constants:", error);
+    throw error;
+  }
+};
+
 // User Functions
 export const getCurrentUser = async (): Promise<User | null> => {
   try {

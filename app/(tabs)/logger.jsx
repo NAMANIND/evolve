@@ -32,6 +32,7 @@ import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 import { Video, Audio } from "expo-av";
 import { uploadExerciseVideo, addExerciseLog } from "@/lib/userFunctions";
 import { ActivityIndicator } from "react-native";
+import { getConstants } from "@/lib/userFunctions";
 const { width } = Dimensions.get("window");
 
 const exerciseTypes = [
@@ -255,13 +256,14 @@ const FitnessTracker = () => {
     setIsRecording(true);
     setRecordingTime(0);
 
-    const sec = 5;
+    const sec = await getConstants();
+    console.log("Starting recording for", sec, "seconds");
 
     recordingTimerRef.current = setInterval(() => {
       setRecordingTime((prev) => {
         console.log("Recording time:", prev + 1);
 
-        if (prev >= sec) {
+        if (prev >= sec.videoDuration) {
           console.log("Automatically stopping recording after 60 seconds");
           clearInterval(recordingTimerRef.current);
 
@@ -278,7 +280,7 @@ const FitnessTracker = () => {
 
     try {
       const options = {
-        maxDuration: sec,
+        maxDuration: sec.videoDuration,
         mute: !hasAudioPermission,
         VideoQuality: "480p",
       };

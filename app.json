@@ -57,7 +57,7 @@
       "https": false
     },
     "extra": {
-      "APIURL": "https://evolveapi.vercel.app",
+      "APIURL": "https://www.zaapi.me",
       "router": {
         "origin": false
       },
